@@ -42,17 +42,36 @@ class ShoppingCard:
 
 
 class Coupon:
-   def __init__(self):
-   
-class Order:
-   def __init__(self):
+    def __init__(self,code,discount_percent):
+       self.code=code
+       self.discount_percent=discount_percent
+
+    def apply_discount(self, amount):
+        discount = amount * (self.discount_percent / 100)
+        return amount - discount
+
 
 class PaymentProcessor:
       def __init__(self):
           pass
 
 class CreditCard(PaymentProcessor):
+    def process_payment(self, amount):
+        print("\nProcessing Credit Card Payment...")
+        print("Checking card details...")
+        print(f"₹{amount} paid using Credit Card")
 
 class PayPal(PaymentProcessor):
+    def process_payment(self, amount):
+        print("\nProcessing PayPal Payment...")
+        print("Logging into PayPal account...")
+        print(f"₹{amount} paid using PayPal")
 
 class crypto(PaymentProcessor):
+    def process_payment(self, amount):
+        print("\nProcessing Crypto Payment...")
+        print("Verifying blockchain transaction...")
+        print(f"₹{amount} paid using Cryptocurrency")
+   
+class Order:
+    def __init__(self):
