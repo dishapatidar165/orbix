@@ -1,6 +1,7 @@
 
 class orgamism:
-    def __init__(self,energy):
+    def __init__(self,energy,name):
+        self.name=name
         self._energy_level = energy
 
     def energy(self):
@@ -21,6 +22,16 @@ class plant(orgaism):
             self._energy_level += amount
         if self._energy_level < 0:
                 self._energy_level = 0
+
+
+                for org in world.organism:
+            if isinstance(org, plant) and org.is_alive():
+                print(f"{self.name} eats {org.name}")
+                org._energy_level -= 5
+                self._energy_level += 5
+                break
+
+        print(f"{self.name} Energy: {self.get_energy()}")
     def act(self,world):
             self.change_energy(1)   
 
@@ -34,12 +45,25 @@ class animal(orgaism):
         self._energy_level += amount
             if self._energy_level < 0:
             self._energy_level = 0
+
+
+
+            
     def move(self,world):
             self.change_energy(-3)
                 #_________________carnivorus_____________________
 class carnivorus(animal):
     def energy(self):
         pass
+
+
+        for org in world.orgamism:
+                if isinstance(org,herbivore) and org.is is_alive
+                print(f"{self.name} eats{org.name}")
+                org._energy_level-=5
+                self._enery_level+=5
+                break
+
     def change_energy(self,amount):
             self._energy_level += amount
             if self._energy_level < 0:
@@ -50,6 +74,12 @@ class carnivorus(animal):
 class herbivore(animal):
     def energy(self):
         pass
+        for org in world.organism:
+            if isinstance(org, plant) and org.is_alive():
+                print(f"{self.name} eats {org.name}")
+                org._energy_level -= 5
+                self._energy_level += 5
+                break
     def change_energy(self,amount):
         self._energy_level += amount
         if self._energy_level < 0:
@@ -69,10 +99,10 @@ class aqua_animal(animal):
             self.change_energy(-3)
         #_____________________birds____________________
 class birds(animal):
-    def energy(self):
-        pass
-    def change_energy(self,amount):
-        self._energy_level += amount
-        if self._energy_level < 0:
-            self._energy_level = 0
-            def.change_energy(-3)
+    def move(self):
+        print(f"{self.name} flies in sky.")
+
+    def act(self, world):
+        super().act(world)
+
+        print(f"{self.name} Energy = {self.energy()}")
