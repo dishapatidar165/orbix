@@ -74,4 +74,48 @@ class crypto(PaymentProcessor):
         print(f"₹{amount} paid using Cryptocurrency")
    
 class Order:
-    def __init__(self):
+    def __init__(self, cart, payment_method):
+        self.cart = cart
+        self.payment_method = payment_method
+
+    def place_order(self, coupon=None):
+        total = self.cart.total_price()
+
+        print("\n===== ORDER SUMMARY =====")
+        print(f"Original Total: ₹{total}")
+
+        if coupon:
+            total = coupon.apply_discount(total)
+            print(f"Coupon Applied: {coupon.code}")
+            print(f"Discounted Total: ₹{total}")
+
+        self.payment_method.process_payment(total)
+
+        print("Order Placed Successfully!")
+
+p1 = Product(101, "Laptop", 60000)
+p2 = Product(102, "Headphones", 2000)
+p3 = Product(103, "Mouse", 1000)
+
+cart = ShoppingCard()
+
+
+cart.add_product(p1)
+cart.add_product(p2)
+cart.add_product(p3)
+
+
+cart.show_cart()
+
+
+coupon = Coupon("SAVE10", 10)
+
+
+payment = crypto()
+
+order = Order(cart, payment)
+
+
+order.place_order(coupon)
+
+
